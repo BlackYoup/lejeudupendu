@@ -1,3 +1,20 @@
 p{
 	text-color: red;
 }
+
+button{
+  cursor: pointer;
+}
+
+.pas_vue{
+  display: none;
+}
+
+.vue{
+  display: block;
+}
+
+.lettre_decouverte, .lettre_non_decouverte{
+  display: inline-block;
+  text-decoration: underline;
+}

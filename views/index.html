@@ -2,6 +2,7 @@
 <html>
 <head>
 	<meta lang="fr" />
+	<meta charset="utf-8" />
 	<title>Pendu</title>
 	<link href="/css/pendu.css" />
 	<script src="/js/lib/jquery-2.1.1.min.js"></script>
@@ -9,6 +10,23 @@
 	<script src="/js/pendu.js"></script>
 </head>
 <body>
-	<p>Pendu !</p>
+	<div id="ensemble">
+    <div id="regles">
+      <button id="regles_button" type="button">Règles</button>
+      <div id="regles_vue" class="pas_vue">
+        <p>Manuel des règles</p>
+        <div id="mode_educatif">
+        </div>
+      </div>
+    </div>
+    <div id="menu">
+      <div>
+        <button type="button" mode="educatif">Mode éducatif</button>
+        <button type="button" mode="fiesta">Mode fiesta</button>
+      </div>
+    </div>
+    <div id="fenetre_jeu">
+    </div>
+  </div>
 </body>
 </html>
