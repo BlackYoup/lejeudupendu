@@ -1,0 +1,32 @@
+{
+  "name": "lejeudupendu",
+  "version": "0.0.1",
+  "description": "Un jeu du pendu version 2.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LefebvreArnaud/lejeudupendu.git"
+  },
+  "keywords": [
+    "pendu",
+    "2.0",
+    "francais",
+    "éducatif"
+  ],
+  "author": "Lefebvre Arnaud, March Chantebel",
+  "license": "GPL V3",
+  "bugs": {
+    "url": "https://github.com/LefebvreArnaud/lejeudupendu/issues"
+  },
+  "homepage": "https://github.com/LefebvreArnaud/lejeudupendu",
+  "dependencies": {
+    "body-parser": "^1.6.2",
+    "errorhandler": "^1.1.1",
+    "express": "^4.8.2",
+    "express-session": "^1.7.4",
+    "morgan": "^1.2.2"
+  }
+}
