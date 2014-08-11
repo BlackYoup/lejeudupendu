@@ -1,44 +1,39 @@
-function Pendu(mot)
+function Pendu(mot, tours)
 {
   var self = this;
   this.mode = "";
   this.level = "";
+  this.vies = [tours, 0];
   this.word = mot;
   this.lettres = [];
-  this.reglesActive = false;
+  this.lettresUtilisees = [];
   this.finPartie = false;
   
   this.afficheMasqueRegles = function()
   {
     $("#regles_button").click(function()
 	  {
-    	if (!self.reglesActive){
-    		self.reglesActive = true;
-    		document.getElementById("regles_vue").setAttribute("class", "vue");
-    	}
-    	else{
-    		self.reglesActive = false;
-    		document.getElementById("regles_vue").setAttribute("class", "pas_vue");
-    	}
+    	if ($("#regles_vue").attr("class") == "pas_vue")
+    		$("#regles_vue").attr("class", "vue");
+    	else
+        $("#regles_vue").attr("class", "pas_vue");
     });
   };
 
   this.eventMode = function()
   {
-    $("#menu button").click(function(e)
-    {
-      self.mode = e.currentTarget.getAttribute("mode");
-      $("#fenetre_jeu").html("<div class=niveau valeur=1><p>Niveau 1 : longueur de mot => Moins de 6 caracteres</p></div><div class=niveau valeur=2><p>Niveau 2 : longueur de mot => Entre 6 et 11 caracteres</p></div><div class=niveau valeur=3><p>Niveau 3 : longueur de mot => 11 caracteres et plus</p></div>");
+    $("#menu button").click(function(){
+      self.mode = this.getAttribute("mode");
+      $("#niveaux").attr("class", "vue");
       self.eventNiveaux();
     });
   };
 
   this.eventNiveaux = function()
   {
-    $("#fenetre_jeu .niveau").click(function(e)
-    {
-      self.level = e.currentTarget.getAttribute("valeur");
-      $("#fenetre_jeu").html("<p>Vous avez choisit le niveau " + self.level + "</p>");
+    $(".niveau img").click(function(){
+      self.niveau = this.parentNode.getAttribute("valeur");
+      $("#fenetre_jeu").html("Vous avez choisit de jouer au niveau " + self.niveau);
     });
   };
   
@@ -47,12 +42,64 @@ function Pendu(mot)
     for (var i = 0, c = this.word.length; i < c; i++){
       allLettres += "<span class=lettre_non_decouverte >?</span>";
     }
-    $("#fenetre_jeu").innerHTML = allLettres;
+    $("#fenetre_jeu").html(allLettres);
     this.lettres = $(".lettre_non_decouverte");
+  };
+
+  this.estRemplit = function(){
+    var valid = true;
+    var i = 0, c = this.word.length;
+    while (i < c && valid){
+      if (this.lettres[i].firstChild.nodeValue == "?")
+        valid = false;
+      else
+        i++;
+    }
+    return valid;
+  };
+
+  this.gereVictoireDefaite = function()//Juste une méthode de test ^^
+  {
+    if (self.vies[0] == self.vies[1])
+      alert("vous avez perdu");
+    else
+      alert("vous avez gagne");
+  };
+
+  this.gereStatutPartie = function(){
+    if (self.estRemplit() || self.vies[0] == self.vies[1])
+    {
+      self.finPartie = true;
+      self.gereVictoireDefaite();
+    }
+  };
+
+  this.remplitMot = function()
+  {
+    $(window).keydown(function(e){
+      if (!self.finPartie){
+        var lettreTapee = String.toLowerCase(String.fromCharCode(e.keyCode));
+        if ($.inArray(lettreTapee, self.lettresUtilisees) == -1){
+          for (var i = 0, c = self.lettres.length; i < c; i++){
+            if (self.lettres[i].firstChild.nodeValue == "?" && self.word.charAt(i) == lettreTapee){
+              self.lettres[i].firstChild.nodeValue = lettreTapee;
+              self.lettres[i].setAttribute("class", "lettre_decouverte");
+            }
+          }
+          self.lettresUtilisees.push(lettreTapee);
+        }
+        self.vies[1]++;
+        self.gereStatutPartie();
+      }
+      else
+        alert("La partie est déjà finie !");
+    });
   };
 }
 
 $(document).ready(function(){
-	var pendu = new Pendu("coucou");
-  pendu.eventMode();
+	var pendu = new Pendu("cheval", 6);
+  //pendu.eventMode();
+  pendu.genereHTMLMot();
+  pendu.remplitMot();
 });

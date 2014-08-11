@@ -22,8 +22,33 @@
     <div id="menu">
       <button type="button" class="bouton_menu" mode="educatif">Mode éducatif</button>
       <button type="button" class="bouton_menu" mode="fiesta">Mode fiesta</button>
+      <div id="niveaux" class="pas_vue">
+        <div class="niveau" valeur="1">
+          <img src="/images/level_1.png" />
+          <p>Longueur de mot : Moins de 6 caracteres</p>
+          </div>
+        <div class="niveau" valeur="2">
+          <img src="/images/level_2.png" />
+          <p>Longueur de mot : Entre 6 et 11 caracteres</p>
+        </div>
+        <div class="niveau" valeur="3">
+          <img src="images/level_3.png" />
+          <p>Longueur de mot : 11 caracteres et plus</p>
+        </div>
+      </div>
     </div>
     <div id="fenetre_jeu">
+      <div id="partie_haute">
+        <p commentaire="Ici sera affiché le recapitulatif du mode et du niveau"></p>
+        <canvas commentaire="ici le pendu">
+          Ici le pendu
+        </canvas>
+      </div>
+      <div id="partie_basse">
+        <p commentaire="le mot avec les points d'interrogation"></p>
+        <div commentaire="les lettres deja tapees par l'utlisateur">
+        </div>
+      </div>
     </div>
   </div>
 </body>

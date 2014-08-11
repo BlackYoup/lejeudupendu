@@ -1,3 +1,14 @@
+body{
+	background-image: url("../public/images/fond.png");
+	background-repeat: no-repeat;
+	background-size: 100%;
+}
+
+div#ensemble{
+	width: 80%;
+	margin-left: 10%;
+}
+
 p{
 	text-color: red;
 }
